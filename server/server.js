@@ -1304,8 +1304,8 @@ app.post('/api/page-content', async (req, res) => {
   }
 });
 
-// Catch-all route to serve the frontend for any other routes
-app.get('*', (req, res) => {
+// Catch-all route to serve the frontend for any other routes (Express 5 compatible)
+app.get('(.*)', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
