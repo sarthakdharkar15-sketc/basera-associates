@@ -1301,8 +1301,8 @@ app.post('/api/page-content', async (req, res) => {
   }
 });
 
-// Catch-all route to serve the frontend for any other routes (Express 5 compatible)
-app.get('/:path*', (req, res) => {
+// Final catch-all middleware to serve the frontend for any unmatched routes
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
