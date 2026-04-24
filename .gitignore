@@ -1,0 +1,23 @@
+node_modules/
+.env
+.npm
+build/
+dist/
+client/dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Uploads
+server/uploads/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
