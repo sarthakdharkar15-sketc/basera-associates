@@ -10,5 +10,8 @@
     "start": "node server/server.js",
     "build": "npm run build --workspace=client",
     "install-all": "npm install"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   }
 }
