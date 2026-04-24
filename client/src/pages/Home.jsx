@@ -269,6 +269,10 @@ function Home() {
                       alt={project.title} 
                       className="l-card-img" 
                       loading="lazy"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = `https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2073`;
+                      }}
                     />
                     <div className="card-status-overlay">
                       <div className="l-badge type-badge">{project.type}</div>

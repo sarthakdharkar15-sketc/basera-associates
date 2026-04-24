@@ -44,7 +44,7 @@ const MumbaiTowerSection = () => {
         left: 0,
         width: '100%',
         height: '100%',
-        backgroundImage: 'url("/mumbai-tower-render.png")',
+        backgroundImage: 'url("/mumbai-tower-render.png"), url("https://images.unsplash.com/photo-1555636222-cae831e670b3?q=80&w=2077")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         opacity: 0.15,

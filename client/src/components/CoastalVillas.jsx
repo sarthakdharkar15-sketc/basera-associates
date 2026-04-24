@@ -138,7 +138,16 @@ export default function CoastalVillas() {
           {displayedVillas.map((villa, idx) => (
             <div key={idx} className="villa-card-premium glass-premium" onClick={() => navigate(`/project/${villa._id}`)} style={{ cursor: 'pointer', borderRadius: '28px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.05)', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }}>
               <div style={{ height: '240px', position: 'relative', overflow: 'hidden' }}>
-                <img src={villa.images?.[0] || `https://images.unsplash.com/photo-${['1507525428034-b723cf961d3e', '1499793983690-e29da59ef1c2', '1520250497591-112f2f40a3f4', '1476514525535-07fb3b4ae5f1'][idx % 4]}?q=80&w=2073`} alt={villa.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 1s ease' }} className="villa-card-img" />
+                <img 
+                  src={villa.images?.[0] || `https://images.unsplash.com/photo-${['1507525428034-b723cf961d3e', '1499793983690-e29da59ef1c2', '1520250497591-112f2f40a3f4', '1476514525535-07fb3b4ae5f1'][idx % 4]}?q=80&w=2073`} 
+                  alt={villa.title} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 1s ease' }} 
+                  className="villa-card-img" 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2073`;
+                  }}
+                />
                 <div style={{ position: 'absolute', top: '20px', left: '20px', display: 'flex', gap: '10px' }}>
                   <div style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', padding: '5px 12px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', color: '#fff', border: '1px solid rgba(255,255,255,0.1)' }}>
                     {villa.city?.toUpperCase()}

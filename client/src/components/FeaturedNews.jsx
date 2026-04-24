@@ -79,6 +79,10 @@ const FeaturedNews = () => {
             }}
             onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg) scale(1.02)'}
             onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(-2deg)'}
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1000";
+            }}
           />
         </div>
 

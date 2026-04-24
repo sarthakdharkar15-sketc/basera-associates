@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const inquirySchema = new mongoose.Schema({
-  projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
+  projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
   name: { type: String, required: true },
   email: { type: String, required: true },
   offerPrice: { type: Number, required: true },

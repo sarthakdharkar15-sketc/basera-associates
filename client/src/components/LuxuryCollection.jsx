@@ -90,6 +90,10 @@ const LuxuryCollection = () => {
                   src={item.image} 
                   alt={item.title} 
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000`;
+                  }}
                 />
                 {/* Dark Gradient Overlay */}
                 <div style={{

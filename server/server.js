@@ -140,8 +140,8 @@ mongoose.connect(MONGO_URI)
           metadata: {
             title: 'Coastal Villas',
             subtitle: 'Exclusive Seaside Living',
-            heroImage: '/property1.jpg',
-            nightImage: '/property1.jpg'
+          heroImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070',
+            nightImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070'
           },
           sections: []
         }
@@ -1302,7 +1302,12 @@ app.post('/api/page-content', async (req, res) => {
 });
 
 // Final catch-all middleware to serve the frontend for any unmatched routes
-app.use((req, res) => {
+// Improved to not interfere with missing assets (images, etc.)
+app.use((req, res, next) => {
+  // If the request is for an API or an asset (file with extension), let it 404 naturally
+  if (req.url.startsWith('/api') || req.url.includes('.')) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 

@@ -130,11 +130,25 @@ function ProjectDetails() {
             alt={project.title} 
             style={{ width: '100%', borderRadius: '12px', border: '1px solid var(--border)' }} 
             loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null; 
+              e.target.src = `https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=2073`;
+            }}
           />
           {project.images && project.images.length > 1 && (
             <div style={{ display: 'flex', gap: '10px', marginTop: '10px', overflowX: 'auto' }}>
               {project.images.slice(1).map((img, idx) => (
-                <img key={idx} src={img} alt="Property View" style={{ height: '80px', borderRadius: '8px', border: '1px solid var(--border)', cursor: 'pointer' }} loading="lazy" />
+                <img 
+                  key={idx} 
+                  src={img} 
+                  alt="Property View" 
+                  style={{ height: '80px', borderRadius: '8px', border: '1px solid var(--border)', cursor: 'pointer' }} 
+                  loading="lazy" 
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = `https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=200`;
+                  }}
+                />
               ))}
             </div>
           )}
