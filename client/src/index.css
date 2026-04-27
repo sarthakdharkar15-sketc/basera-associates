@@ -172,7 +172,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-
 /* Micro Interactions */
 .icon-spin-hover {
   transition: transform 0.4s ease;
@@ -391,14 +390,6 @@ select option {
   transform: translateY(-1px);
 }
 
-.form-control-luxe:focus {
-  outline: none;
-  border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 4px rgba(195, 157, 99, 0.15);
-  transform: translateY(-1px);
-}
-
 /* Property Grid */
 .projects-grid {
   display: grid;
@@ -471,7 +462,6 @@ select option {
   border: 1px solid rgba(231, 76, 60, 0.3);
 }
 
-
 .actions {
   display: flex;
   justify-content: space-between;
@@ -508,31 +498,76 @@ select option {
 .mt-4 { margin-top: 24px; }
 
 /* Responsive Media Queries */
+/* Global Mobile Responsiveness Overhaul */
 @media (max-width: 768px) {
-  .mobile-hide { display: none !important; }
+  :root {
+    --section-spacing: 50px;
+  }
+
+  /* Typography */
+  h1 { font-size: clamp(2rem, 10vw, 2.5rem) !important; line-height: 1.1 !important; }
+  h2 { font-size: clamp(1.6rem, 8vw, 2rem) !important; line-height: 1.2 !important; }
+  h3 { font-size: 1.3rem !important; }
+  p { font-size: 0.95rem !important; line-height: 1.6 !important; }
+
+  /* Spacing */
+  .container {
+    padding: 0 20px !important;
+  }
   
+  section {
+    padding: 40px 0 !important;
+    margin: 0 !important;
+  }
+
+  .mt-5, .mb-5 { margin-top: 30px !important; margin-bottom: 30px !important; }
+
+  /* Layout */
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .glass, .glass-premium {
+    padding: 25px 20px !important;
+    border-radius: 20px !important;
+  }
+
+  /* Components specific tweaks */
   .hero {
-    padding: 80px 0 60px;
+    padding: 60px 0 40px !important;
   }
-  
-  .btn {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .navbar .btn {
-    width: auto !important;
-    margin-bottom: 0;
-  }
-  
+
   .navbar {
-    padding: 10px 0;
+    height: 70px !important;
   }
 
-  .nav-links {
-    display: none !important;
+  .navbar-logo {
+    height: 35px !important;
   }
 
+  /* Form Controls */
+  .form-control, .form-control-luxe {
+    padding: 12px 15px !important;
+    font-size: 16px !important; /* Prevents iOS zoom */
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 0 20px !important;
+    text-align: center;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+
+  /* Utility Classes */
+  .mobile-hide { display: none !important; }
+  .nav-links { display: none !important; }
+
+  /* Footer Section Mobile */
   .footer-section {
     text-align: center;
     display: flex;
@@ -542,6 +577,21 @@ select option {
   
   .footer-section ul {
     align-items: center;
+  }
+
+  /* Touch Targets */
+  button, a {
+    min-height: 44px; /* Apple recommendation */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 380px) {
+  .brand span {
+    display: none; /* Hide 'Associates' if too small */
   }
 }
 
