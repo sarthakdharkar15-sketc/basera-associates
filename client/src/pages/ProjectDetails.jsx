@@ -123,7 +123,7 @@ function ProjectDetails() {
         <ArrowLeft size={18} style={{ marginRight: '8px' }} /> Back to listings
       </Link>
       
-      <div style={{ display: 'flex', gap: '40px', alignItems: 'start', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 'clamp(20px, 5vw, 40px)', alignItems: 'start', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 400px' }}>
           <img 
             src={project.images && project.images.length > 0 ? project.images[0] : `https://images.unsplash.com/photo-${['1560518883-ce09059eeffa', '1512917774080-9991f1c4c750', '1600585154340-be6161a56a0c', '1600607687940-c52af04657b3', '1545324418-cc1a3fa10c00'][project.title.length % 5]}?q=80&w=2073`} 
@@ -166,12 +166,12 @@ function ProjectDetails() {
 
         <div>
           <div className="badge">{project.type}</div>
-          <h1 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'var(--primary)' }}>{project.title}</h1>
-          <p style={{ display: 'flex', alignItems: 'center', color: 'var(--text-muted)', marginBottom: '20px', fontSize: '1.1rem' }}>
-            <MapPin size={20} style={{ marginRight: '8px' }} /> {project.location}
+          <h1 style={{ fontSize: 'clamp(1.8rem, 6vw, 2.5rem)', marginBottom: '10px', color: 'var(--primary)', lineHeight: 1.1 }}>{project.title}</h1>
+          <p style={{ display: 'flex', alignItems: 'center', color: 'var(--text-muted)', marginBottom: '20px', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)' }}>
+            <MapPin size={18} style={{ marginRight: '8px' }} /> {project.location}
           </p>
           
-          <div style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '10px' }}>
+          <div style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 'bold', marginBottom: '10px' }}>
             ₹ {formatIndianPrice(project.price)}
           </div>
           
@@ -200,15 +200,15 @@ function ProjectDetails() {
             {project.description}
           </p>
 
-          <div style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', gap: '15px', marginBottom: '20px', flexWrap: 'wrap' }}>
             <button 
               onClick={() => setShowBrochureModal(true)} 
               className="btn btn-primary btn-animated" 
-              style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', height: '54px', fontSize: '1rem', borderRadius: '12px' }}
+              style={{ display: 'flex', alignItems: 'center', flex: '1 1 200px', justifyContent: 'center', height: '54px', fontSize: '1rem', borderRadius: '12px' }}
             >
               <Download size={20} style={{ marginRight: '10px' }} /> Request Brochure
             </button>
-            <a href={`tel:${project.phone || '+919876543210'}`} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', flex: 1, justifyContent: 'center', textDecoration: 'none', borderRadius: '12px' }}>
+            <a href={`tel:${project.phone || '+919876543210'}`} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', flex: '1 1 200px', justifyContent: 'center', textDecoration: 'none', borderRadius: '12px', height: '54px' }}>
               <Phone size={18} style={{ marginRight: '8px' }} /> Helpline
             </a>
           </div>
@@ -233,12 +233,12 @@ function ProjectDetails() {
                 ⚠️ Hurry! Only a few units left at this price
                </p>
              )}
-             <div style={{ display: 'flex', gap: '15px' }}>
-               <button onClick={() => setShowVisitModal(true)} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, fontSize: '1.1rem', padding: '12px' }}>
+             <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
+               <button onClick={() => setShowVisitModal(true)} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '1 1 200px', fontSize: '1.1rem', padding: '12px', minHeight: '54px' }}>
                   <Calendar size={20} style={{ marginRight: '10px' }} /> Schedule a Visit
                </button>
-               <button onClick={() => setShowVirtualTour(true)} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1, fontSize: '1.1rem', padding: '12px', borderColor: 'var(--success)', color: 'var(--success)' }}>
-                  <Video size={20} style={{ marginRight: '10px' }} /> Start Virtual Tour
+               <button onClick={() => setShowVirtualTour(true)} className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '1 1 200px', fontSize: '1.1rem', padding: '12px', borderColor: 'var(--success)', color: 'var(--success)', minHeight: '54px' }}>
+                  <Video size={20} style={{ marginRight: '10px' }} /> Virtual Tour
                </button>
              </div>
           </div>

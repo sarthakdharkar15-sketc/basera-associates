@@ -253,7 +253,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(15px, 5vw, 40px);
 }
 
 .app-content {
@@ -303,17 +303,18 @@ body {
 /* Hero Section */
 .hero {
   text-align: center;
-  padding: 100px 0;
+  padding: clamp(60px, 12vh, 100px) 0;
   background: radial-gradient(circle at center, rgba(195,157,99,0.1) 0%, rgba(15,17,21,0) 70%);
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: clamp(2.2rem, 8vw, 4rem);
   margin-bottom: 20px;
+  line-height: 1.1;
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   color: var(--text-muted);
   max-width: 600px;
   margin: 0 auto 40px;
@@ -401,8 +402,8 @@ select option {
 /* Property Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 100%, 350px), 1fr));
+  gap: clamp(15px, 4vw, 30px);
   margin-top: 40px;
 }
 
@@ -508,58 +509,39 @@ select option {
 
 /* Responsive Media Queries */
 @media (max-width: 768px) {
-  .mobile-toggle {
-    display: block;
-    cursor: pointer;
-    color: var(--primary);
-  }
+  .mobile-hide { display: none !important; }
   
-  .nav-links {
-    display: none !important;
-    flex-direction: column;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    background: var(--bg-card);
-    padding: 20px;
-    z-index: 1000;
-    align-items: flex-start !important;
-    gap: 15px;
-  }
-  
-  .nav-links > a, .nav-links > div {
-    margin-left: 0 !important;
-  }
-  
-  .nav-links.mobile-open {
-    display: flex !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
   .hero {
-    padding: 60px 0;
+    padding: 80px 0 60px;
   }
   
-  .hero h1 {
-    font-size: 2.5rem;
+  .btn {
+    width: 100%;
+    margin-bottom: 10px;
   }
   
-  .hero p {
-    font-size: 1rem;
-    padding: 0 10px;
+  .navbar .btn {
+    width: auto !important;
+    margin-bottom: 0;
   }
   
-  .filters {
-    gap: 10px;
+  .navbar {
+    padding: 10px 0;
   }
 
-  .btn {
-    padding: 10px 18px;
-    font-size: 0.9rem;
+  .nav-links {
+    display: none !important;
+  }
+
+  .footer-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  .footer-section {
-    margin-bottom: 20px;
+  .footer-section ul {
+    align-items: center;
   }
 }
 

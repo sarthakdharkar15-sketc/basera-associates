@@ -115,7 +115,7 @@ function Home() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '100px 20px',
+        padding: 'clamp(60px, 12vh, 100px) 20px',
         overflow: 'hidden'
       }}>
         {/* Background Image with Dark Overlay */}

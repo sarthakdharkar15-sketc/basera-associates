@@ -106,7 +106,7 @@ function Auth() {
         maxWidth: '1000px', 
         display: 'flex', 
         overflow: 'hidden',
-        minHeight: '600px'
+        minHeight: 'clamp(500px, 80vh, 700px)'
       }}>
         
         {/* Left Side - Visual Context */}

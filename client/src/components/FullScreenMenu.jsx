@@ -1,11 +1,27 @@
-import { X, Sparkles, ShieldCheck } from 'lucide-react';
+import { X, Sparkles, ShieldCheck, User, LogIn, Bell, Home, Info, Briefcase, LayoutGrid, Gem, MapPin, Scale, Compass, Users, CreditCard, Camera, PhoneCall } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 const FullScreenMenu = ({ isOpen, onClose }) => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   if (!isOpen) return null;
+
+  const menuLinks = [
+    { name: 'Home', path: '/', icon: <Home size={20} /> },
+    { name: 'About Us', path: '/about', icon: <Info size={20} /> },
+    { name: 'Services', path: '/services', icon: <Briefcase size={20} /> },
+    { name: 'Portfolio', path: '/portfolio', icon: <LayoutGrid size={20} /> },
+    { name: 'Altamount Crown', path: '/altamount-crown', icon: <Gem size={20} /> },
+    { name: 'Coastal Luxury', path: '/coastal-villas', icon: <MapPin size={20} /> },
+    { name: 'Projects', path: '/#projects', icon: <LayoutGrid size={20} /> },
+    { name: 'RERA Compliance', path: '/rera-compliance', icon: <Scale size={20} /> },
+    { name: 'Vastu Homes', path: '/vastu-homes', icon: <Compass size={20} /> },
+    { name: 'Broker Network', path: '/broker-network', icon: <Users size={20} /> },
+    { name: 'Membership Plans', path: '/pricing', icon: <CreditCard size={20} /> },
+    { name: 'Moments', path: '/extra-ordinary', icon: <Camera size={20} /> },
+    { name: 'Contact', path: '/#footer', icon: <PhoneCall size={20} /> },
+  ];
 
   return (
     <div style={{
@@ -14,231 +30,130 @@ const FullScreenMenu = ({ isOpen, onClose }) => {
       left: 0,
       width: '100vw',
       height: '100vh',
-      backgroundColor: '#000000',
+      backgroundColor: 'rgba(5, 6, 8, 0.98)',
+      backdropFilter: 'blur(30px)',
       zIndex: 100000,
       display: 'flex',
       flexDirection: 'column',
-      animation: 'fadeInMenu 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+      animation: 'fadeInMenu 0.4s var(--apple-spring) forwards',
       color: '#ffffff',
-      overflowY: 'auto',
-      paddingBottom: '50px'
+      overflowX: 'hidden'
     }}>
       <style>{`
         @keyframes fadeInMenu {
-          from { opacity: 0; backdrop-filter: blur(0px); transform: scale(1.05); }
-          to { opacity: 1; backdrop-filter: blur(30px); transform: scale(1); }
-        }
-        @keyframes floatIn {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
+          from { opacity: 0; transform: scale(1.05); }
+          to { opacity: 1; transform: scale(1); }
         }
         .fs-menu-item {
-          font-size: clamp(1.8rem, 3vw, 2.5rem);
-          font-weight: 200;
-          letter-spacing: 6px;
-          color: rgba(255, 255, 255, 0.5);
+          font-size: clamp(1rem, 3.5vw, 1.3rem);
+          font-weight: 300;
+          color: rgba(255, 255, 255, 0.7);
           text-decoration: none;
-          transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-          text-transform: uppercase;
-          margin: 12px 0;
-          font-family: 'Outfit', sans-serif;
-          position: relative;
-          padding: 8px 20px;
+          transition: all 0.3s ease;
+          padding: 10px 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center; /* Center Content */
+          gap: 15px;
+          border-radius: 12px;
+          width: 95%;
+          max-width: 400px; /* Constrain width for better centering look */
+          border: 1px solid transparent;
+          text-align: center;
         }
         .fs-menu-item:hover {
-          color: #ffffff;
-          transform: scale(1.05);
-          letter-spacing: 10px;
-          text-shadow: 0 0 20px rgba(255,255,255,0.4);
+          color: var(--primary);
+          background: rgba(195, 157, 99, 0.1);
+          border-color: rgba(195, 157, 99, 0.2);
+          transform: scale(1.05); /* Change animation from translateX to scale for centered feel */
         }
-        .fs-menu-item::after {
-          content: '';
-          position: absolute;
-          width: 0;
-          height: 1px;
-          bottom: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: #ffffff;
-          transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-          box-shadow: 0 0 10px rgba(255,255,255,0.8);
-        }
-        .fs-menu-item:hover::after {
-          width: 80%;
-        }
-        
-        /* Highlight Item Styles */
-        .fs-highlight-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin: 35px 0 25px 0;
-          animation: floatIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          opacity: 0;
-          animation-delay: 0.3s;
-          text-decoration: none;
-          position: relative;
-        }
-        .highlight-title-wrapper {
-          display: flex;
-          align-items: center;
-          gap: 15px;
-          position: relative;
-        }
-        .highlight-title {
-          font-size: clamp(2rem, 4vw, 3.2rem);
-          font-weight: 500;
-          letter-spacing: 8px;
-          color: #ffffff;
-          text-transform: uppercase;
-          font-family: "Playfair Display", "Times New Roman", serif;
-          transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-          text-shadow: 0 0 15px rgba(255,255,255,0.2);
-        }
-        .highlight-tag {
-          background: rgba(195, 157, 99, 0.15);
-          border: 1px solid rgba(195, 157, 99, 0.5);
-          color: #c39d63;
-          padding: 4px 10px;
-          border-radius: 4px;
-          font-size: 0.75rem;
+        .fs-btn {
+          width: 90%;
+          max-width: 300px;
+          padding: 14px;
+          border-radius: 100px;
           font-weight: 700;
+          text-transform: uppercase;
           letter-spacing: 2px;
-          white-space: nowrap;
-          text-transform: uppercase;
-          transition: all 0.4s ease;
-          display: flex;
-          align-items: center;
-          gap: 4px;
-        }
-        .highlight-subtitle {
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.4);
-          letter-spacing: 3px;
-          margin-top: 10px;
-          text-transform: uppercase;
-          transition: color 0.4s ease;
-          font-family: 'Outfit', sans-serif;
-        }
-        .fs-highlight-item:hover .highlight-title {
-          transform: scale(1.05);
-          letter-spacing: 12px;
-          color: #c39d63;
-          text-shadow: 0 0 30px rgba(195, 157, 99, 0.5);
-        }
-        .fs-highlight-item:hover .highlight-subtitle {
-          color: rgba(195, 157, 99, 0.8);
-        }
-        .fs-highlight-item:hover .highlight-tag {
-          background: #c39d63;
-          color: #111;
-          border-color: #c39d63;
-          box-shadow: 0 0 15px rgba(195, 157, 99, 0.4);
-        }
-        .highlight-glow-bar {
-          position: absolute;
-          bottom: -15px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 0;
-          height: 1px;
-          background: #c39d63;
-          box-shadow: 0 0 15px 2px rgba(195, 157, 99, 0.6);
-          transition: width 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .fs-highlight-item:hover .highlight-glow-bar {
-          width: 100%;
-        }
-
-        .fs-taskbar {
-          background: rgba(255, 255, 255, 0.03);
-          backdrop-filter: blur(40px);
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
-          height: 60px;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 20px;
-          position: relative;
-        }
-        .win-icon {
-          width: 28px;
-          height: 28px;
-          background: rgba(255,255,255,0.1);
-          border-radius: 4px;
-          transition: all 0.3s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          gap: 12px;
+          margin: 8px 0;
+          border: none;
           cursor: pointer;
-        }
-        .win-icon:hover {
-          background: rgba(255,255,255,0.25);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 10px rgba(255,255,255,0.1);
-        }
-        .win-icon.start {
-          background: linear-gradient(135deg, #00A4EF, #0078D7);
-          border-radius: 6px;
+          transition: all 0.3s;
+          text-decoration: none;
+          font-size: 0.9rem;
         }
       `}</style>
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '40px 6vw', alignItems: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <img 
-            src="/logo.png" 
-            alt="Basera" 
-            style={{ height: '45px', width: 'auto', objectFit: 'contain' }} 
-          />
-          <span style={{ fontSize: '1.8rem', fontWeight: '800', letterSpacing: '2px', color: '#fff', fontFamily: "'Outfit', sans-serif" }}>
-            Basera Associates<span style={{ color: '#ef4444' }}>.</span>
-          </span>
+      {/* Header Area */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '25px 20px', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/logo.png" alt="Basera" style={{ height: '30px', width: 'auto' }} />
+          <span style={{ fontSize: '1.1rem', fontWeight: '800', letterSpacing: '1px' }}>BASERA ASSOCIATES<span style={{ color: '#ef4444' }}>.</span></span>
         </div>
-        <button onClick={onClose} style={{
-          background: 'transparent', border: 'none', color: '#fff', cursor: 'pointer', transition: 'transform 0.4s ease'
-        }} onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(90deg) scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg) scale(1)'}>
-          <X size={44} strokeWidth={1} color="#ffffff" />
+        <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: '#fff', padding: '8px', borderRadius: '50%' }}>
+          <X size={24} />
         </button>
       </div>
 
-      {/* Center Menu */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <Link to="/" className="fs-menu-item" onClick={onClose}>HOME</Link>
-        <Link to="/about" className="fs-menu-item" onClick={onClose}>ABOUT US</Link>
-        <Link to="/services" className="fs-menu-item" onClick={onClose}>SERVICES</Link>
-        <Link to="/portfolio" className="fs-menu-item" onClick={onClose}>PORTFOLIO</Link>
-        <Link to="/altamount-crown" className="fs-menu-item" onClick={onClose}>ALTAMOUNT CROWN</Link>
-        <Link to="/coastal-villas" className="fs-menu-item" onClick={onClose}>EXCLUSIVE COASTAL COLLECTION</Link>
-        <Link to="/#projects" className="fs-menu-item" onClick={onClose}>PROJECTS</Link>
-        <Link to="/rera-compliance" className="fs-menu-item" onClick={onClose}>RERA COMPLIANCE</Link>
-        <Link to="/vastu-homes" className="fs-menu-item" onClick={onClose}>VASTU COMPLIANT HOMES</Link>
+      {/* Main Scrollable Content - Centered */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '30px 10px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
         
-        {/* New Premium Sections */}
-        <Link to="/broker-network" className="fs-menu-item" onClick={onClose}>SMART BROKER NETWORK</Link>
-        <Link to="/pricing" className="fs-menu-item" onClick={onClose}>MEMBERSHIP PLANS</Link>
-        
-        <Link to="/extra-ordinary" className="fs-menu-item" onClick={onClose}>EXTRAORDINARY MOMENTS</Link>
-        
-
-        <Link to="/#footer" className="fs-menu-item" onClick={onClose}>CONTACT</Link>
-        
-        {user?.role === 'admin' && (
-          <Link to="/admin" className="fs-menu-item" onClick={onClose} style={{ color: 'var(--primary)', marginTop: '40px', display: 'flex', alignItems: 'center', gap: '15px', fontWeight: 'bold' }}>
-            <ShieldCheck size={32} /> ADMIN CONSOLE
+        {/* Profile Section - Centered */}
+        {user ? (
+          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '15px 20px', borderRadius: '20px', width: '90%', maxWidth: '350px', marginBottom: '25px', border: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textAlign: 'center' }}>
+            <div style={{ background: 'var(--primary)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '5px' }}>
+              <User size={24} />
+            </div>
+            <div>
+              <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{user.name}</h3>
+              <p style={{ margin: '2px 0 0', color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem' }}>{user.role} Account</p>
+            </div>
+          </div>
+        ) : (
+          <Link to="/auth" className="fs-btn" onClick={onClose} style={{ background: 'var(--primary)', color: '#fff', marginBottom: '25px' }}>
+            <LogIn size={18} /> Login / Sign Up
           </Link>
         )}
+
+        {/* Dynamic Menu Links - All centered with staggered animation */}
+        <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+          {menuLinks.map((link, idx) => (
+            <Link 
+              key={idx} 
+              to={link.path} 
+              className="fs-menu-item" 
+              onClick={onClose}
+              style={{ animation: `fadeInMenu 0.4s var(--apple-spring) ${0.1 + idx * 0.03}s forwards`, opacity: 0 }}
+            >
+              <span style={{ color: 'var(--primary)', flexShrink: 0 }}>{link.icon}</span>
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* Footer Actions */}
+        <div style={{ marginTop: '30px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '20px' }}>
+          {user && (
+            <>
+              {user.role === 'admin' && (
+                <Link to="/admin" className="fs-btn" onClick={onClose} style={{ background: 'rgba(255,255,255,0.08)', color: '#fff' }}>
+                  <ShieldCheck size={18} /> Admin Dashboard
+                </Link>
+              )}
+              <button onClick={() => { logout(); onClose(); }} className="fs-btn" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}>
+                 Logout and Exit
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
-      {/* Bottom Section */}
-      <div>
-        <div style={{ height: '1px', background: 'rgba(255, 255, 255, 0.1)', width: '100%' }}></div>
-        <div className="fs-taskbar">
-           {/* Simulated Windows 11 Taskbar Icons */}
-           <div className="win-icon start"></div>
-           <div className="win-icon" style={{ borderRadius: '50%' }}></div>
-           <div className="win-icon" style={{ borderRadius: '8px' }}></div>
-           <div className="win-icon" style={{ width: '40px', background: 'rgba(255,255,255,0.05)' }}></div>
-        </div>
+      <div style={{ padding: '20px', textAlign: 'center', opacity: 0.3, fontSize: '0.7rem', letterSpacing: '1px', textTransform: 'uppercase' }}>
+         &copy; 2026 BASERA ASSOCIATES
       </div>
     </div>
   );
