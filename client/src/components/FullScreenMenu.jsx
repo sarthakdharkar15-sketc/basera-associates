@@ -64,16 +64,16 @@ const FullScreenMenu = ({ isOpen, onClose }) => {
           to { opacity: 1; }
         }
         .fs-menu-item {
-          font-size: clamp(1.2rem, 5.5vw, 1.5rem);
+          font-size: clamp(1.1rem, 5vw, 1.4rem);
           font-weight: 500;
           color: rgba(255, 255, 255, 0.8);
           text-decoration: none;
           transition: all 0.4s ease;
-          padding: 12px 20px;
+          padding: 10px 20px;
           display: block;
           width: 100%;
           text-align: center;
-          letter-spacing: 2px;
+          letter-spacing: 1.5px;
           font-family: 'Outfit', sans-serif;
           text-transform: uppercase;
         }
@@ -150,7 +150,17 @@ const FullScreenMenu = ({ isOpen, onClose }) => {
       </div>
 
       {/* Main Content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '40px 20px', position: 'relative' }}>
+      <div style={{ 
+        flex: 1, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'flex-start', // Start from top for better mobile scrolling
+        alignItems: 'center', 
+        padding: '20px 20px 40px', // Reduced top padding
+        position: 'relative',
+        overflowY: 'auto', // Enable scrolling for the content area
+        WebkitOverflowScrolling: 'touch'
+      }}>
         
         {notificationsOpen ? (
           <div style={{ 
@@ -158,13 +168,13 @@ const FullScreenMenu = ({ isOpen, onClose }) => {
             maxWidth: '500px', 
             animation: 'fadeInUp 0.5s ease forwards',
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: '700', letterSpacing: '2px', color: '#c39d63' }}>NOTIFICATIONS</h3>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '15px' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '700', letterSpacing: '2px', color: '#c39d63', margin: 0 }}>NOTIFICATIONS</h3>
               <button 
                 onClick={() => setNotificationsOpen(false)}
-                style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: '#fff', padding: '8px 15px', borderRadius: '20px', fontSize: '0.8rem', cursor: 'pointer' }}
+                style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', padding: '6px 12px', borderRadius: '20px', fontSize: '0.75rem', cursor: 'pointer', fontWeight: '600' }}
               >
-                BACK TO MENU
+                CLOSE
               </button>
             </div>
 

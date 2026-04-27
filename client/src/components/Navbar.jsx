@@ -90,17 +90,17 @@ function Navbar() {
 
           <div style={{ position: 'relative', cursor: 'pointer', color: 'var(--text-main)', padding: '5px' }}>
               <div onClick={() => setNotificationsOpen(!notificationsOpen)}>
-                <Bell size={20} />
+                <Bell size={18} />
                   <span style={{ 
                     position: 'absolute', 
-                    top: '-5px', 
-                    right: '-5px', 
+                    top: '-3px', 
+                    right: '-3px', 
                     background: '#ef4444', 
                     color: '#000', 
                     borderRadius: '50%', 
-                    width: '16px', 
-                    height: '16px', 
-                    fontSize: '9px', 
+                    width: '14px', 
+                    height: '14px', 
+                    fontSize: '8px', 
                     fontWeight: '800',
                     display: 'flex', 
                     alignItems: 'center', 
@@ -109,7 +109,7 @@ function Navbar() {
                   }}>
                     <span style={{ 
                       background: '#c39d63', 
-                      width: '9px', 
+                      width: '8px', 
                       height: '100%', 
                       display: 'flex', 
                       alignItems: 'center', 
@@ -123,62 +123,48 @@ function Navbar() {
               {notificationsOpen && (
                 <div style={{
                   position: 'absolute',
-                  top: '45px',
-                  right: '0',
-                  width: '280px',
-                  background: 'rgba(20, 21, 24, 0.95)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  top: '40px',
+                  right: '-10px',
+                  width: 'min(300px, 85vw)', // Responsive width
+                  background: 'rgba(10, 11, 14, 0.98)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
                   borderRadius: '16px',
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-                  backdropFilter: 'blur(15px)',
+                  boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+                  backdropFilter: 'blur(20px)',
                   zIndex: 10000,
-                  padding: '15px 0',
+                  padding: '12px 0',
                   animation: 'slideDownNav 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards'
                 }}>
-                  <div style={{ padding: '0 20px 10px', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#fff', letterSpacing: '1px' }}>NOTIFICATIONS</span>
-                    <button onClick={() => setNotificationsOpen(false)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', cursor: 'pointer' }}>
+                  <div style={{ padding: '0 15px 10px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#c39d63', letterSpacing: '1px' }}>NOTIFICATIONS</span>
+                    <button onClick={() => setNotificationsOpen(false)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer' }}>
                       <X size={14} />
                     </button>
                   </div>
                   
-                  <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                  <div style={{ maxHeight: '250px', overflowY: 'auto' }}>
                     {upcomingProjects.length > 0 && (
-                      <div style={{ padding: '15px 20px', borderBottom: '1px solid rgba(255,255,255,0.03)', cursor: 'pointer' }}>
-                        <div style={{ fontSize: '0.85rem', color: '#c39d63', fontWeight: '600', marginBottom: '4px' }}>New Project Alert</div>
-                        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
-                          {upcomingProjects[0].name} has been added to the upcoming collection.
+                      <div style={{ padding: '12px 15px', borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer' }}>
+                        <div style={{ fontSize: '0.8rem', color: '#fff', fontWeight: '600', marginBottom: '2px' }}>New Project Alert</div>
+                        <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.4' }}>
+                          {upcomingProjects[0].name} has been added.
                         </div>
                       </div>
                     )}
                     
-                    <div style={{ padding: '15px 20px', borderBottom: '1px solid rgba(255,255,255,0.03)', cursor: 'pointer' }}>
-                      <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>Welcome to Basera</div>
-                      <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
-                        Explore our luxury collection of villas and apartments across India.
-                      </div>
-                    </div>
-
-                    <div style={{ padding: '15px 20px', cursor: 'pointer' }}>
-                      <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>Market Update</div>
-                      <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
-                        Real estate prices in Mumbai are seeing a positive trend this quarter.
+                    <div style={{ padding: '12px 15px', borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer' }}>
+                      <div style={{ fontSize: '0.8rem', color: '#fff', fontWeight: '600', marginBottom: '2px' }}>Welcome</div>
+                      <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.4' }}>
+                        Explore our luxury collection.
                       </div>
                     </div>
                   </div>
                   
-                  <div style={{ padding: '10px 20px 0', textAlign: 'center' }}>
-                    <Link to="/portfolio" style={{ fontSize: '0.7rem', color: '#c39d63', textDecoration: 'none', fontWeight: '600' }} onClick={() => setNotificationsOpen(false)}>
-                      VIEW ALL PROJECTS
+                  <div style={{ padding: '10px 15px 0', textAlign: 'center' }}>
+                    <Link to="/portfolio" style={{ fontSize: '0.65rem', color: '#c39d63', textDecoration: 'none', fontWeight: '700' }} onClick={() => setNotificationsOpen(false)}>
+                      VIEW ALL
                     </Link>
                   </div>
-
-                  <style>{`
-                    @keyframes slideDownNav {
-                      from { opacity: 0; transform: translateY(-10px); }
-                      to { opacity: 1; transform: translateY(0); }
-                    }
-                  `}</style>
                 </div>
               )}
           </div>
