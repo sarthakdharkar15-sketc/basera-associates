@@ -247,6 +247,7 @@ const FullScreenMenu = ({ isOpen, onClose }) => {
             </button>
           )}
         </div>
+      )}
       </div>
 
       {/* Subtle Copyright */}
