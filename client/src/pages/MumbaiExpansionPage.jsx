@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { TrendingUp, MapPin, Building, Globe, CheckCircle, Rocket, Shield, Users, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer';
 
 const MumbaiExpansionPage = () => {
   const navigate = useNavigate();
@@ -323,9 +322,6 @@ const MumbaiExpansionPage = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
-
       <style>{`
         @keyframes slowZoom {
           from { transform: scale(1); }

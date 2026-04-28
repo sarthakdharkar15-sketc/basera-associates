@@ -87,28 +87,67 @@ function Chatbot() {
          const isReady = (lowerInput.includes('ready') || lowerInput.includes('move')) && (status.includes('ready') || status.includes('move'));
          const isPreLaunch = (lowerInput.includes('new') || lowerInput.includes('launch')) && (status.includes('launch') || status.includes('upcoming'));
 
-         // 3. Price Filter
+         // 3. Price/Budget Filter
          let pricePass = true;
-         if (lowerInput.includes('under') || lowerInput.includes('below') || lowerInput.includes('max')) {
-             const budgetVal = lowerInput.match(/\d+/);
-             if (budgetVal) {
-                 const multiplier = lowerInput.includes('cr') ? 10000000 : 100000;
-                 const limit = parseInt(budgetVal[0]) * multiplier;
-                 pricePass = p.price <= limit;
+         let budgetFound = false;
+         const hasBudgetKeyword = lowerInput.match(/(budget|under|below|max|lakh|lac|cr|crore|₹|rs)/);
+         
+         if (hasBudgetKeyword) {
+             const regex = /(\d+(\.\d+)?)\s*(lakh|lac|cr|crore)/;
+             const match = lowerInput.match(regex);
+             
+             if (match) {
+                 budgetFound = true;
+                 const val = parseFloat(match[1]);
+                 const isCr = match[3].startsWith('cr');
+                 const multiplier = isCr ? 10000000 : 100000;
+                 const limit = val * multiplier;
+                 
+                 // 15% upper buffer, 70% lower bound for relevance
+                 pricePass = p.price <= (limit * 1.15) && p.price >= (limit * 0.3);
+             } else {
+                 const numMatch = lowerInput.match(/\d{5,}/);
+                 if (numMatch) {
+                     budgetFound = true;
+                     const limit = parseInt(numMatch[0]);
+                     pricePass = p.price <= (limit * 1.15) && p.price >= (limit * 0.3);
+                 }
              }
          }
 
          // Combined matching weight
+         if (budgetFound) {
+             const hasCity = ['mumbai', 'pune', 'indore', 'goa'].some(c => lowerInput.includes(c));
+             if (hasCity && !lowerInput.includes(city)) return false; 
+             return pricePass && matchBHK;
+         }
+
          if (coreMatch && pricePass && matchBHK) return true;
          if (isVastu || isReady || isPreLaunch) return true;
          
          return false;
       });
 
+      // Sort by closest price if budget was specified
+      if (lowerInput.match(/(budget|under|below|max|lakh|lac|cr|crore|₹|rs)/)) {
+          const regex = /(\d+(\.\d+)?)\s*(lakh|lac|cr|crore)/;
+          const match = lowerInput.match(regex);
+          if (match) {
+              const val = parseFloat(match[1]);
+              const multiplier = match[3].startsWith('cr') ? 10000000 : 100000;
+              const limit = val * multiplier;
+              matchedProjects.sort((a, b) => Math.abs(a.price - limit) - Math.abs(b.price - limit));
+          }
+      }
+
       let aiResponse = { id: Date.now() + 1, sender: "ai" };
 
       if (matchedProjects.length > 0) {
-        aiResponse.text = `Based on your specific needs, I've curated ${matchedProjects.length} premium options. ${matchedProjects[0].title} seems like a perfect fit!`;
+        let responseText = `Based on your specific needs, I've curated ${matchedProjects.length} premium options. ${matchedProjects[0].title} seems like a perfect fit!`;
+        if (lowerInput.match(/(budget|lakh|lac|cr|crore)/)) {
+             responseText = `I found ${matchedProjects.length} properties that fit your budget perfectly. ${matchedProjects[0].title} is an excellent choice to consider!`;
+        }
+        aiResponse.text = responseText;
         aiResponse.results = matchedProjects.slice(0, 3);
       } else {
         // Advanced Knowledge Base Expansion

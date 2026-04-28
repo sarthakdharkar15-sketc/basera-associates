@@ -125,45 +125,68 @@ function Navbar() {
                   position: 'absolute',
                   top: '40px',
                   right: '-10px',
-                  width: 'min(300px, 85vw)', // Responsive width
-                  background: 'rgba(10, 11, 14, 0.98)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  width: 'min(340px, 90vw)',
+                  background: 'rgba(20, 22, 27, 0.98)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
                   borderRadius: '16px',
                   boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
                   backdropFilter: 'blur(20px)',
                   zIndex: 10000,
-                  padding: '12px 0',
-                  animation: 'slideDownNav 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                  padding: '16px',
+                  animation: 'slideDownNav 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px'
                 }}>
-                  <div style={{ padding: '0 15px 10px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#c39d63', letterSpacing: '1px' }}>NOTIFICATIONS</span>
-                    <button onClick={() => setNotificationsOpen(false)} style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer' }}>
-                      <X size={14} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                    <span style={{ fontSize: '1rem', fontWeight: '700', color: '#fff' }}>Notifications</span>
+                    <button onClick={() => setNotificationsOpen(false)} style={{ background: 'none', border: 'none', color: '#c39d63', cursor: 'pointer', fontSize: '0.75rem', fontWeight: '600' }}>
+                      Mark all as read
                     </button>
                   </div>
                   
-                  <div style={{ maxHeight: '250px', overflowY: 'auto' }}>
-                    {upcomingProjects.length > 0 && (
-                      <div style={{ padding: '12px 15px', borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer' }}>
-                        <div style={{ fontSize: '0.8rem', color: '#fff', fontWeight: '600', marginBottom: '2px' }}>New Project Alert</div>
-                        <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.4' }}>
-                          {upcomingProjects[0].name} has been added.
+                  <div style={{ maxHeight: '380px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {/* First Item */}
+                    <div style={{ padding: '14px', background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8))', border: '1px solid rgba(56, 189, 248, 0.15)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                      <div style={{ fontSize: '0.65rem', color: '#60a5fa', fontWeight: '700', marginBottom: '6px', letterSpacing: '0.5px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span>🚀</span> NETWORK LAUNCH
+                      </div>
+                      <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>Coming Soon: Smart Broker Network</div>
+                      <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
+                        Join the elite platform for professionals.
+                      </div>
+                    </div>
+
+                    {/* Second Item */}
+                    <div style={{ padding: '14px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                      <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>Welcome to Basera Associates!</div>
+                      <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
+                        We are thrilled to have you here, {user ? user.name.split(' ')[0] : 'Guest'}.
+                      </div>
+                    </div>
+
+                    {/* Third Item */}
+                    {upcomingProjects.length > 0 ? (
+                      <div style={{ padding: '14px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                        <div style={{ fontSize: '0.65rem', color: '#c39d63', fontWeight: '700', marginBottom: '6px', letterSpacing: '0.5px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span>✨</span> UPCOMING PROJECT
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>{upcomingProjects[0].name}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
+                          {upcomingProjects[0].location || 'Explore our newest luxury development.'}
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{ padding: '14px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                        <div style={{ fontSize: '0.65rem', color: '#c39d63', fontWeight: '700', marginBottom: '6px', letterSpacing: '0.5px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span>✨</span> UPCOMING PROJECT
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: '#fff', fontWeight: '600', marginBottom: '4px' }}>Jagdish Bhawan</div>
+                        <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>
+                          Beside Rajhans Dal Bafla, Sarafa Bajaar
                         </div>
                       </div>
                     )}
-                    
-                    <div style={{ padding: '12px 15px', borderBottom: '1px solid rgba(255,255,255,0.05)', cursor: 'pointer' }}>
-                      <div style={{ fontSize: '0.8rem', color: '#fff', fontWeight: '600', marginBottom: '2px' }}>Welcome</div>
-                      <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', lineHeight: '1.4' }}>
-                        Explore our luxury collection.
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div style={{ padding: '10px 15px 0', textAlign: 'center' }}>
-                    <Link to="/portfolio" style={{ fontSize: '0.65rem', color: '#c39d63', textDecoration: 'none', fontWeight: '700' }} onClick={() => setNotificationsOpen(false)}>
-                      VIEW ALL
-                    </Link>
                   </div>
                 </div>
               )}
