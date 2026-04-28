@@ -208,6 +208,60 @@ function Navbar() {
                 <User size={16} />
                 <span className="mobile-hide" style={{ fontSize: '0.85rem', fontWeight: 600 }}>{user.name.split(' ')[0]}</span>
               </div>
+
+              {dropdownOpen && (
+                <div style={{
+                  position: 'absolute',
+                  top: '40px',
+                  right: '0',
+                  width: '240px',
+                  background: 'rgba(20, 22, 27, 0.98)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '16px',
+                  boxShadow: '0 20px 50px rgba(0,0,0,0.6)',
+                  backdropFilter: 'blur(20px)',
+                  zIndex: 10000,
+                  overflow: 'hidden',
+                  animation: 'slideDownNav 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards'
+                }}>
+                  <div style={{ padding: '16px', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+                    <div style={{ fontSize: '1.1rem', fontWeight: '700', color: '#fff', marginBottom: '4px' }}>
+                      {user.name}
+                    </div>
+                    <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>
+                      Role: {user.role || 'user'}
+                    </div>
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', padding: '8px' }}>
+                    <Link to={user.role === 'admin' ? '/admin' : '/dashboard'} 
+                          style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: '#fff', borderRadius: '8px', transition: 'all 0.2s' }}
+                          onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                          onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                          onClick={() => setDropdownOpen(false)}>
+                      <LayoutDashboard size={18} />
+                      <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>Dashboard</span>
+                    </Link>
+                    
+                    <Link to="/change-password" 
+                          style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none', color: '#fff', borderRadius: '8px', transition: 'all 0.2s' }}
+                          onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                          onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                          onClick={() => setDropdownOpen(false)}>
+                      <Key size={18} />
+                      <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>Change Password</span>
+                    </Link>
+                    
+                    <button onClick={handleLogout} 
+                            style={{ padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '12px', background: 'transparent', border: 'none', color: '#ef4444', borderRadius: '8px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s', width: '100%' }}
+                            onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
+                            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
+                      <LogOut size={18} />
+                      <span style={{ fontSize: '0.9rem', fontWeight: '500' }}>Logout</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <Link to="/auth" className="btn btn-primary" style={{ padding: '8px 16px', borderRadius: '20px', fontSize: '0.85rem', textDecoration: 'none' }}>Login</Link>
